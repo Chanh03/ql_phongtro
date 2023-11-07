@@ -1,3 +1,3 @@
-# ql_phongtro
-COMMIT CSDL CHO ĐÀNG HOÀNG =))
-Vào file csdl sửa xong commit lên để t check ✔️
+PHẦN ĐỂ CODE
+  SAI CÒN SỬA
+  MẤT CÒN CÓ BACKUP
