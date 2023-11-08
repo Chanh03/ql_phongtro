@@ -2,7 +2,7 @@
  * Hello This Is Vanh
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ql_phongtro;
+package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,18 +15,21 @@ import javax.swing.Timer;
  * @author Chanh Chanh
  */
 public class ChaoJDialog extends javax.swing.JFrame {
+
     Timer timer;
-    Ql_phongtro qlpt;
-   
+    DangNhapJFrame dangNhapJFrame = new DangNhapJFrame();
     public ChaoJDialog() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setTitle("Loading...");
         updateProgressBar();
+        this.dispose();
     }
 
     public void updateProgressBar() {
         timer = new Timer(1, new ActionListener() {
             int progress = 0;
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Cập nhật giá trị cho ProgressBar
@@ -34,8 +37,9 @@ public class ChaoJDialog extends javax.swing.JFrame {
                 progress++;
                 // Dừng timer nếu đã hoàn thành
                 if (progress > 100) {
-                    timer.stop(); 
-                }                
+                    timer.stop();
+                    dangNhapJFrame.setVisible(true);
+                }
             }
         });
         timer.start();
@@ -56,7 +60,9 @@ public class ChaoJDialog extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pgbLoading.setBackground(new java.awt.Color(255, 255, 255));
+        pgbLoading.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         pgbLoading.setForeground(new java.awt.Color(0, 204, 0));
+        pgbLoading.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         pgbLoading.setStringPainted(true);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hinhanh/22222.png"))); // NOI18N
@@ -66,16 +72,17 @@ public class ChaoJDialog extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pgbLoading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pgbLoading, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pgbLoading, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pgbLoading, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
