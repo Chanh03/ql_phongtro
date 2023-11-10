@@ -1,4 +1,4 @@
-public void KiemTraDauVao() {
+    public void KiemTraDauVao() {
         String password = new String(txtMatKhau.getPassword());
 
         //Kiểm tra dữ liệu nhập vào
@@ -16,25 +16,37 @@ public void KiemTraDauVao() {
                 String sql = "Select * from NguoiDung";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
-                if (rs.next()) {
+                
+                boolean dangNhapThanhCong = false;
+
+                while (rs.next()) {
                     String tenDangNhap = rs.getNString("TenDangNhap");
-                    String matKhau = rs.getNString("MatKhau");
+                    String matKhau = rs.getNString("Matkhau");
                     String chucVu = rs.getNString("ChucVu");
 
                     if (txtTenDangNhap.getText().equalsIgnoreCase(tenDangNhap) && password.equalsIgnoreCase(matKhau)) {
-                        System.out.println("Đăng nhập thành công");
+                        dangNhapThanhCong = true;
                         if (chucVu.equalsIgnoreCase("Quản Lí")) {
-                            System.out.println("quuan li");
-                        } else {
-                            System.out.println("nv");
+                            System.out.println("Quản lý");
+                        } else if (chucVu.equalsIgnoreCase("Nhân Viên")) {
+                            System.out.println("Nhân viên");
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không chính xác", "Cảnh Báo", JOptionPane.WARNING_MESSAGE);
+                        break; // Thoát khỏi vòng lặp ngay khi đăng nhập thành công
                     }
                 }
                 con.close();
-
+                
+                //
+                if (dangNhapThanhCong) {
+                    System.out.println("Đăng nhập thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không chính xác", "Cảnh Báo", JOptionPane.WARNING_MESSAGE);
+                }
+                //
+                
+                
             } catch (SQLException ex) {
                 Logger.getLogger(DangNhapJFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
